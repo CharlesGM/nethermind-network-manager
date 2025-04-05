@@ -304,6 +304,7 @@ resource "google_project_iam_binding" "gke_admin" {
   project = var.project_id
   role    = "roles/container.admin"
   members = [
-    "user:xxxxxxxx@gmail.com"
+    # "user:xxxxxxxx@gmail.com"
+    "user:gachangocmbugua@gmail.com"
   ]
 }

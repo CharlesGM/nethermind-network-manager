@@ -33,4 +33,4 @@ RUN mkdir -p /app/Data /app/logs /app/keystore
 EXPOSE 8545 30303
 
 # Set the entrypoint
-ENTRYPOINT ["dotnet", "Nethermind.Runner.dll"] 
+ENTRYPOINT ["dotnet", "Nethermind.Runner.dll"]
