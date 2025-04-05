@@ -18,7 +18,7 @@ env:
  PROJECT_ID: play-project-325908      # GCP project identifier
  GCP_REGION: europe-west1             # GCP region for resources
  IMAGE_NAME: nethermind               # Name of the Docker image
- HELM_CHART_PATH: helm/nethermind-network  # Path to Helm chart directory
+ HELM_CHART_PATH: nethermind/helm/nethermind-network  # Path to Helm chart directory
  REPOSITORY_NAME: nethermind          # Artifact Registry repository name
 
 jobs:
@@ -36,6 +36,16 @@ jobs:
      with:
        fetch-depth: 1                  # Only fetch latest commit for efficiency
        token: ${{ secrets.TOKEN_GITHUB }}  # Token for push access
+       path: nethermind                # Checkout into nethermind directory
+       repository: CharlesGM/nethermind-network-manager
+       ssh-strict: true
+       persist-credentials: true
+       clean: true
+       sparse-checkout-cone-mode: true
+       fetch-tags: false
+       lfs: false
+       submodules: false
+       set-safe-directory: true
 
    # Set up Docker Buildx for better caching
    - name: Set up Docker Buildx
@@ -86,7 +96,7 @@ jobs:
    - name: Build and Push Docker image
      uses: docker/build-push-action@v4
      with:
-       context: .
+       context: ./nethermind
        push: true
        tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
        cache-from: type=gha
