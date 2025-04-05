@@ -1,0 +1,72 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Hardhat
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Hardhat coverage
+coverage/
+coverage.json
+
+# Misc
+.DS_Store
+*.pem
+.npmrc
+
+# Local Nethermind data
+Data/
+logs/
+keystore/
+nethermind_db/
+
+# Sensitive files
+*.auto.tfvars
+
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore override files as they are usually used for local development
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+play-project-325908-52a7908c58a1.json

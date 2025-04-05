@@ -1,0 +1,45 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Hardhat
+cache/
+artifacts/
+typechain/
+typechain-types/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Hardhat coverage
+coverage/
+coverage.json
+
+# Misc
+.DS_Store
+*.pem
+.npmrc
+
+# Local Nethermind data
+Data/
+logs/
+keystore/
+nethermind_db/ 

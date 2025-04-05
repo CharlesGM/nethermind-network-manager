@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-genesis
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: nethermind
+data:
+  genesis.json: |
+    {
+      "difficulty": {{ .Values.genesis.difficulty | quote }},
+      "gasLimit": {{ .Values.genesis.gasLimit | quote }},
+      "timestamp": {{ .Values.genesis.timestamp | quote }},
+      "extraData": {{ .Values.genesis.extraData | quote }},
+      "nonce": "0x0000000000000042",
+      "coinbase": {{ .Values.genesis.coinbase | quote }},
+      "alloc": {{ .Values.genesis.alloc | toJson }}
+    } 

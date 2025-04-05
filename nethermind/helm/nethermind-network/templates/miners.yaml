@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-miner
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: nethermind
+    component: miner
+spec:
+  serviceName: {{ .Release.Name }}-miner
+  replicas: {{ .Values.miners.replicas }}
+  selector:
+    matchLabels:
+      app: nethermind
+      component: miner
+  template:
+    metadata:
+      labels:
+        app: nethermind
+        component: miner
+    spec:
+      containers:
+      - name: nethermind
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - "--config=goerli"
+        - "--Network.DiscoveryPort=30303"
+        - "--Network.P2PPort=30303"
+        - "--JsonRpc.Enabled=true"
+        - "--JsonRpc.Host=0.0.0.0"
+        - "--JsonRpc.Port=8545"
+        - "--Network.NetworkId={{ .Values.networkId }}"
+        - "--Network.ChainId={{ .Values.chainId }}"
+        - "--Mining.Enabled=true"
+        - "--DiscoveryNewPeers=true"
+        - "--Sync.FastSync=false"
+        - "--StaticNodesPath=/nethermind/Data/static-nodes.json"
+        ports:
+        - name: discovery
+          containerPort: 30303
+          protocol: UDP
+        - name: p2p
+          containerPort: 30303
+          protocol: TCP
+        - name: json-rpc
+          containerPort: 8545
+        resources:
+          {{- toYaml .Values.miners.resources | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-miner
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: nethermind
+    component: miner
+spec:
+  ports:
+  - name: discovery
+    port: 30303
+    protocol: UDP
+  - name: p2p
+    port: 30303
+    protocol: TCP
+  - name: json-rpc
+    port: 8545
+  selector:
+    app: nethermind
+    component: miner 
