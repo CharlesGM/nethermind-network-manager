@@ -34,5 +34,3 @@ EXPOSE 8545 30303
 
 # Set the entrypoint
 ENTRYPOINT ["dotnet", "Nethermind.Runner.dll"]
-
-
