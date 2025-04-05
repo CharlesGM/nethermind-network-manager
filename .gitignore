@@ -68,5 +68,3 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-play-project-325908-52a7908c58a1.json

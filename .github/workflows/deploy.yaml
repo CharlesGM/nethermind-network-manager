@@ -5,13 +5,13 @@ on:
   push:
     branches:
       - main
-    paths:
-      # - 'Dockerfile'
-      # - 'helm/**'
-      # Exclude infrastructure changes
-      - '!terraform/**'
-      - '!crossplane/**'
-      - '!argocd/**'
+    # paths:
+    #   # - 'Dockerfile'
+    #   # - 'helm/**'
+    #   # Exclude infrastructure changes
+    #   - '!terraform/**'
+    #   - '!crossplane/**'
+    #   - '!argocd/**'
 
 # Environment variables used throughout the workflow
 env:
