@@ -1,13 +1,14 @@
-# Local Ethereum Testnet with Nethermind
+# Ethereum Testnet with Nethermind on GCP
 
-This project sets up a local Ethereum testnet using Nethermind nodes orchestrated with Helm charts. It includes a bootnode and two mining nodes.
+This project sets up an Ethereum testnet using Nethermind nodes orchestrated with Helm charts on Google Cloud Platform. It includes a bootnode and multiple mining nodes.
 
 ## Prerequisites
 
-- Docker
-- Kubernetes cluster (e.g., minikube, kind)
+- Google Cloud Platform account
+- Terraform
+- Google Cloud SDK
 - Helm
-- Node.js and npm
+- kubectl
 
 ## Node Types
 
@@ -35,83 +36,90 @@ Miner nodes are responsible for the actual work of maintaining the blockchain. T
 
 ## Setup
 
-1. Build the Nethermind Docker image:
+### 1. Deploy GCP Infrastructure with Terraform
 
-   ### Using Docker Desktop and Minikube
-   When using minikube with Docker Desktop, you need to make your locally built Docker image available to minikube:
+First, configure your GCP project information in terraform/terraform.tfvars:
 
-   Option 1: Point your shell to minikube's Docker daemon, then build the image:
-   ```bash
-   # Point your terminal to minikube's Docker daemon
-   eval $(minikube -p minikube docker-env)
-   
-   # Now build the image (it will be available directly to minikube)
-   docker build -t nethermind .
-   ```
-
-   Option 2: Build locally and load into minikube:
-   ```bash
-   # Build the image with your local Docker
-   docker build -t nethermind .
-   
-   # Save the image to a tar file
-   docker save nethermind > nethermind.tar
-   
-   # Load the image into minikube
-   minikube image load nethermind.tar
-   ```
-
-   Make sure to set `pullPolicy: Never` in values.yaml if using these methods.
-
-2. Deploy the Ethereum network:
 ```bash
-# The chart will automatically create the nethermind namespace
-helm install eth-testnet ./helm/nethermind-network
+# Set up authentication to GCP
+gcloud auth application-default login
+
+# Navigate to the terraform directory
+cd terraform
+
+# Initialize Terraform
+terraform init
+
+# Review the infrastructure plan
+terraform plan
+
+# Deploy the infrastructure
+terraform apply
 ```
 
-3. Install smart contract dependencies:
+This will create:
+- A GKE cluster
+- Required networking components
+- IAM roles and service accounts
+- Artifact Registry for container images
+
+### 2. Configure kubectl
+
+After Terraform successfully creates the infrastructure, configure kubectl:
+
 ```bash
-npm install
+gcloud container clusters get-credentials ledgerndary-cluster --region $(terraform output -raw region) --project $(terraform output -raw project_id)
 ```
 
-## Deploying Smart Contracts
+### 3. CI/CD Pipeline Deployment
 
-1. Wait for the network to start (check pod status):
-```bash
-kubectl get pods -n nethermind
+The project uses GitHub Actions for CI/CD. The pipeline automatically:
+
+1. Builds the Nethermind Docker image and pushes it to GCP Artifact Registry
+2. Updates the Helm chart values.yaml with the new image tag
+3. Deploys or updates the Nethermind network on the GKE cluster
+
+When you push changes to the main branch, the workflow in `.github/workflows/deploy.yaml` will:
+- Build and push the Nethermind container image
+- Update the Helm values.yaml with the new image tag
+- Check if a Nethermind release already exists in the cluster
+- If it exists, perform a `helm upgrade`
+- If not, create a new release with `helm install`
+
+The deployment uses the following parameters:
+```
+helm install nethermind ${{ env.HELM_CHART_PATH }} \
+  --namespace nethermind \
+  --wait \
+  --timeout 10m \
+  --atomic
 ```
 
-2. Deploy the SimpleStorage contract:
-```bash
-npx hardhat run scripts/deploy.js --network local
-```
+**Note:** Manual deployment is generally not needed since the CI/CD pipeline handles it automatically.
 
 ## Network Details
 
 - Network ID: 1337
 - Chain ID: 1337
-- RPC Endpoint: http://localhost:8545 (after port-forwarding)
-- Mining Nodes: 2
+- RPC Endpoint: Access via GCP Load Balancer (see below)
+- Mining Nodes: 2 (configurable)
 - Bootnode: 1
 - Kubernetes Namespace: nethermind
 
-## Port Forwarding
+## Accessing the Network
 
-To access the JSON-RPC API locally:
+The bootnode exposes JSON-RPC API through a GCP Load Balancer. To get the endpoint:
+
 ```bash
-kubectl port-forward -n nethermind svc/eth-testnet-bootnode 8545:8545
+kubectl get svc -n nethermind nethermind-bootnode -o jsonpath="{.status.loadBalancer.ingress[0].ip}"
 ```
 
-## Testing
-
-The network includes a simple storage smart contract for testing. You can interact with it using Hardhat console:
-```bash
-npx hardhat console --network local
-```
+Use this IP address with port 8545 to connect to the Ethereum network: `http://<EXTERNAL-IP>:8545`
 
 ## Monitoring
 
 To check the status of your nodes:
+
 ```bash
 # View all pods in the nethermind namespace
 kubectl get pods -n nethermind
@@ -121,4 +129,13 @@ kubectl logs -n nethermind <pod-name>
 
 # View all services
 kubectl get svc -n nethermind
+```
+
+## Clean Up
+
+To destroy the infrastructure and avoid incurring charges:
+
+```bash
+cd terraform
+terraform destroy
 ``` 
