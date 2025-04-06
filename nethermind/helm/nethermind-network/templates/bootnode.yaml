@@ -25,14 +25,22 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
-        - "--config=goerli"
-        - "--Network.DiscoveryPort=30303"
-        - "--Network.P2PPort=30303"
-        - "--JsonRpc.Enabled=true"
-        - "--JsonRpc.Host=0.0.0.0"
-        - "--JsonRpc.Port=8545"
-        - "--Network.NetworkId={{ .Values.networkId }}"
-        - "--Network.ChainId={{ .Values.chainId }}"
+        - "--config"
+        - "goerli"
+        - "--Network.DiscoveryPort"
+        - "30303"
+        - "--Network.P2PPort"
+        - "30303"
+        - "--JsonRpc.Enabled"
+        - "true"
+        - "--JsonRpc.Host"
+        - "0.0.0.0"
+        - "--JsonRpc.Port"
+        - "8545"
+        - "--Network.NetworkId"
+        - "{{ .Values.networkId }}"
+        - "--Network.ChainId"
+        - "{{ .Values.chainId }}"
         ports:
         - name: discovery
           containerPort: 30303
