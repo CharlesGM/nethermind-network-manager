@@ -8,8 +8,8 @@ service_cidr = "10.32.0.0/16"
 # GKE Configuration
 cluster_name                  = "ledgerndary-cluster"
 environment                   = "dev"
-workload_identity_pool_id     = "ledgerndary-wif-gh-pool"
-workload_identity_provider_id = "ledgerndary-wif-gh-provider"
+workload_identity_pool_id     = "nevermind-gh-pool"
+workload_identity_provider_id = "nevermind-gh-provider"
 
 # Node Pool
 node_count     = 1

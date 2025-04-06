@@ -261,44 +261,6 @@ resource "kubernetes_namespace" "ledgerndary" {
   depends_on = [null_resource.wait_for_gke]
 }
 
-# ArgoCD Installation with enhanced security
-resource "kubernetes_namespace" "argocd" {
-  metadata {
-    name = "argocd"
-    labels = {
-      "environment" = var.environment
-      "managed-by" = "terraform"
-    }
-  }
-  depends_on = [null_resource.wait_for_gke]
-}
-
-resource "helm_release" "argocd" {
-  name             = "argocd"
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  version          = "5.46.7"
-  namespace        = kubernetes_namespace.argocd.metadata[0].name
-  create_namespace = false
-  wait             = false
-
-  values = [
-    <<-EOT
-    server:
-      extraArgs:
-        - --insecure
-      service:
-        type: ClusterIP
-      
-    # Add repository configuration
-    repositories:
-      ledgerndary:
-        url: ${var.github_repo}
-        type: git
-    EOT
-  ]
-  depends_on = [kubernetes_namespace.argocd]
-}
 # Limited GKE admin access
 resource "google_project_iam_binding" "gke_admin" {
   project = var.project_id
