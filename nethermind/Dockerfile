@@ -10,7 +10,8 @@ RUN git clone https://github.com/NethermindEth/nethermind.git --recursive
 WORKDIR /nethermind
 
 # Build Nethermind
-RUN dotnet build src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj -c Release
+RUN dotnet restore src/Nethermind/Nethermind.sln
+RUN dotnet build src/Nethermind/Nethermind.sln -c Release
 RUN dotnet publish src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj -c Release -o /app
 
 # Runtime image
