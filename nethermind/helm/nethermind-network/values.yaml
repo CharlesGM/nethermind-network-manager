@@ -1,9 +1,8 @@
 image:
-  repository: us-central1-docker.pkg.dev/play-project-325908/nethermind/nethermind
-  tag: latest
+  repository: europe-west1-docker.pkg.dev/play-project-325908/ledgerndary/nethermind
+  tag: 853cd6af15a99b59c5455b6300598731778ef0b4
   # pullPolicy: Always
-  pullPolicy: Never
-
+  pullPolicy: Always
 bootnode:
   enabled: true
   resources:
@@ -13,7 +12,6 @@ bootnode:
     limits:
       cpu: "1000m"
       memory: "2Gi"
-
 miners:
   replicas: 2
   resources:
@@ -23,10 +21,8 @@ miners:
     limits:
       cpu: "2000m"
       memory: "4Gi"
-
 networkId: 1337
 chainId: 1337
-
 genesis:
   difficulty: "1"
   gasLimit: "8000000"
@@ -35,4 +31,4 @@ genesis:
   extraData: "0x"
   alloc:
     "0x0000000000000000000000000000000000000000":
-      balance: "1000000000000000000000000000" 
+      balance: "1000000000000000000000000000"
