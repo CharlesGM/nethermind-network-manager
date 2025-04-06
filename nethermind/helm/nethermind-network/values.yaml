@@ -1,6 +1,6 @@
 image:
   repository: europe-west1-docker.pkg.dev/play-project-325908/nethermind/nethermind
-  tag: 712147f469ad12d8ed1ff548532a0724642b73ba
+  tag: 1b71ea5a4b9ccceecd2ecdfbb961d033827702f5
   # pullPolicy: Always
   pullPolicy: Always
 bootnode:
