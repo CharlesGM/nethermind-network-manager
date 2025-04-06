@@ -19,7 +19,7 @@ env:
  GCP_REGION: europe-west1             # GCP region for resources
  IMAGE_NAME: nethermind               # Name of the Docker image
  HELM_CHART_PATH: nethermind/helm/nethermind-network  # Path to Helm chart directory
- REPOSITORY_NAME: nethermind          # Artifact Registry repository name
+ REPOSITORY_NAME: ledgerndary          # Artifact Registry repository name
 
 jobs:
  build-and-push-nethermind-image:
