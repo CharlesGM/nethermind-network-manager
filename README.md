@@ -124,25 +124,25 @@ This project includes comprehensive guides for testing your smart contracts on t
 
 | Guide | Purpose | When to Use |
 |-------|---------|-------------|
-| [TEST_GUIDE.md](TEST_GUIDE.md) | General testing workflow from local development to production | Start here for an overview of the testing process |
-| [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) | Detailed instructions for testing on your GCP Kubernetes cluster | Use when ready to test on your GCP-deployed network |
-| [WALLET_GUIDE.md](WALLET_GUIDE.md) | Comprehensive wallet setup and obtaining ETH for gas | Use when you need help with wallets and getting test ETH |
+| [TEST_GUIDE.md](nethermind/TEST_GUIDE.md) | General testing workflow from local development to production | Start here for an overview of the testing process |
+| [GCP_TESTING_GUIDE.md](nethermind/GCP_TESTING_GUIDE.md) | Detailed instructions for testing on your GCP Kubernetes cluster | Use when ready to test on your GCP-deployed network |
+| [WALLET_GUIDE.md](nethermind/WALLET_GUIDE.md) | Comprehensive wallet setup and obtaining ETH for gas | Use when you need help with wallets and getting test ETH |
 
 ### Getting Started with Testing
 
-1. **First, review [TEST_GUIDE.md](TEST_GUIDE.md)** for:
+1. **First, review [TEST_GUIDE.md](nethermind/TEST_GUIDE.md)** for:
    - Understanding the overall testing workflow
    - Setting up your local development environment
    - Learning about the available testing tools
    - Seeing the recommended testing sequence
 
-2. **Then use [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) when you're ready to:**
+2. **Then use [GCP_TESTING_GUIDE.md](nethermind/GCP_TESTING_GUIDE.md) when you're ready to:**
    - Test on your GCP-deployed Nethermind network
    - Choose between port forwarding or direct kubectl approaches
    - Deploy contracts to your Kubernetes cluster
    - Monitor and troubleshoot GCP-specific issues
 
-3. **Refer to [WALLET_GUIDE.md](WALLET_GUIDE.md) if you need help with:**
+3. **Refer to [WALLET_GUIDE.md](nethermind/WALLET_GUIDE.md) if you need help with:**
    - Understanding wallets and gas fees
    - Setting up MetaMask or using Hardhat wallets
    - Obtaining test ETH on Goerli testnet
@@ -154,6 +154,9 @@ This project includes comprehensive guides for testing your smart contracts on t
 For the impatient, here's a quick path to testing:
 
 ```bash
+# Navigate to the nethermind directory
+cd nethermind
+
 # 1. Install dependencies
 npm install
 
