@@ -24,23 +24,23 @@ spec:
       - name: nethermind
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args:
-        - "config"
-        - "goerli"
-        - "Network.DiscoveryPort"
-        - "30303"
-        - "Network.P2PPort"
-        - "30303"
-        - "JsonRpc.Enabled"
-        - "true"
-        - "JsonRpc.Host"
-        - "0.0.0.0"
-        - "JsonRpc.Port"
-        - "8545"
-        - "Network.NetworkId"
-        - "{{ .Values.networkId }}"
-        - "Network.ChainId"
-        - "{{ .Values.chainId }}"
+        env:
+        - name: NETHERMIND_CONFIG
+          value: "goerli"
+        - name: NETHERMIND_NETWORK_DISCOVERYPORT
+          value: "30303"
+        - name: NETHERMIND_NETWORK_P2PPORT
+          value: "30303"
+        - name: NETHERMIND_JSONRPC_ENABLED
+          value: "true"
+        - name: NETHERMIND_JSONRPC_HOST
+          value: "0.0.0.0"
+        - name: NETHERMIND_JSONRPC_PORT
+          value: "8545"
+        - name: NETHERMIND_NETWORK_NETWORKID
+          value: "{{ .Values.networkId }}"
+        - name: NETHERMIND_NETWORK_CHAINID
+          value: "{{ .Values.chainId }}"
         ports:
         - name: discovery
           containerPort: 30303
