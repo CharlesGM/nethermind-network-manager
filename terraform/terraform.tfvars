@@ -14,12 +14,12 @@ workload_identity_provider_id = "nevermind-gh-provider"
 # Node Pool
 node_count     = 1
 max_node_count = 3
-machine_type   = "e2-small"
+machine_type   = "e2-standard-2"
 disk_size_gb   = 30
 
 # Artifact Registry
-repository_name = "ledgerndary"
-namespace       = "ledgerndary"
+repository_name = "nethermind"
+namespace       = "nethermind"
 
 authorized_networks = [
   {
