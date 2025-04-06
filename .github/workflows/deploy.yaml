@@ -50,6 +50,10 @@ jobs:
    # Set up Docker Buildx for better caching
    - name: Set up Docker Buildx
      uses: docker/setup-buildx-action@v2
+     with:
+       driver-opts: |
+         image=moby/buildkit:master
+         network=host
 
    # Set up GCP authentication using Workload Identity Federation
    - id: 'auth'
@@ -92,15 +96,16 @@ jobs:
      run: |
        gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
 
-   # Build and push Docker image with caching
-   - name: Build and Push Docker image
+   # Build and push Docker image with enhanced caching
+   - name: Build and push Docker image
      uses: docker/build-push-action@v4
      with:
-       context: ./nethermind
+       context: .
        push: true
        tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
        cache-from: type=gha
        cache-to: type=gha,mode=max
+       platforms: linux/amd64
 
    # Update Helm values with new image tag
    - name: Update Helm values

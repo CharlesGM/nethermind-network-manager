@@ -121,7 +121,7 @@ resource "google_iam_workload_identity_pool_provider" "github" {
     "attribute.ref"        = "assertion.ref"
     "attribute.repository_owner" = "assertion.repository_owner"
   }
-  attribute_condition = "attribute.repository == 'CharlesGM/oidc-gcp-integration-project' && attribute.repository_owner == 'CharlesGM'"
+  attribute_condition = "attribute.repository == 'CharlesGM/nethermind-network-manager' && attribute.repository_owner == 'CharlesGM'"
 
   oidc {
     issuer_uri = "https://token.actions.githubusercontent.com"
@@ -180,7 +180,7 @@ resource "google_service_account_iam_binding" "workload_identity_binding" {
   service_account_id = google_service_account.github_actions.name
   role               = "roles/iam.workloadIdentityUser"
   members = [
-    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/CharlesGM/oidc-gcp-integration-project"
+    "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.github.name}/attribute.repository/CharlesGM/nethermind-network-manager"
   ]
   depends_on = [
     google_service_account.github_actions,
