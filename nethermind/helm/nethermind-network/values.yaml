@@ -1,8 +1,7 @@
 image:
   repository: europe-west1-docker.pkg.dev/play-project-325908/nethermind/nethermind
-  tag: 1b71ea5a4b9ccceecd2ecdfbb961d033827702f5
+  tag: 39561bf557f0add995dcf435e603d08b36ead740
   pullPolicy: Always
-
 bootnode:
   enabled: true
   resources:
@@ -21,10 +20,8 @@ miners:
     limits:
       cpu: "2000m"
       memory: "4Gi"
-
 networkId: 1337
 chainId: 1337
-
 genesis:
   difficulty: "1"
   gasLimit: "8000000"
