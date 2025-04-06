@@ -36,7 +36,6 @@ jobs:
      with:
        fetch-depth: 1                  # Only fetch latest commit for efficiency
        token: ${{ secrets.TOKEN_GITHUB }}  # Token for push access
-       path: nethermind                # Checkout into nethermind directory
        repository: CharlesGM/nethermind-network-manager
        ssh-strict: true
        persist-credentials: true
@@ -100,7 +99,7 @@ jobs:
    - name: Build and push Docker image
      uses: docker/build-push-action@v4
      with:
-       context: .
+       context: ./nethermind
        push: true
        tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
        cache-from: type=gha
