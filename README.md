@@ -100,8 +100,8 @@ helm install nethermind ${{ env.HELM_CHART_PATH }} \
 ## Network Details
 
 - Network ID: 1337
-- Chain ID: 1337
-- RPC Endpoint: Access via GCP Load Balancer (see below)
+- Chain ID: 5 (Goerli testnet)
+- RPC Endpoint: Access via port forwarding or kubectl exec
 - Mining Nodes: 2 (configurable)
 - Bootnode: 1
 - Kubernetes Namespace: nethermind
@@ -115,6 +115,95 @@ kubectl get svc -n nethermind nethermind-bootnode -o jsonpath="{.status.loadBala
 ```
 
 Use this IP address with port 8545 to connect to the Ethereum network: `http://<EXTERNAL-IP>:8545`
+
+## Smart Contract Testing
+
+This project includes comprehensive guides for testing your smart contracts on the Nethermind network.
+
+### Testing Guides Overview
+
+| Guide | Purpose | When to Use |
+|-------|---------|-------------|
+| [TEST_GUIDE.md](TEST_GUIDE.md) | General testing workflow from local development to production | Start here for an overview of the testing process |
+| [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) | Detailed instructions for testing on your GCP Kubernetes cluster | Use when ready to test on your GCP-deployed network |
+| [WALLET_GUIDE.md](WALLET_GUIDE.md) | Comprehensive wallet setup and obtaining ETH for gas | Use when you need help with wallets and getting test ETH |
+
+### Getting Started with Testing
+
+1. **First, review [TEST_GUIDE.md](TEST_GUIDE.md)** for:
+   - Understanding the overall testing workflow
+   - Setting up your local development environment
+   - Learning about the available testing tools
+   - Seeing the recommended testing sequence
+
+2. **Then use [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) when you're ready to:**
+   - Test on your GCP-deployed Nethermind network
+   - Choose between port forwarding or direct kubectl approaches
+   - Deploy contracts to your Kubernetes cluster
+   - Monitor and troubleshoot GCP-specific issues
+
+3. **Refer to [WALLET_GUIDE.md](WALLET_GUIDE.md) if you need help with:**
+   - Understanding wallets and gas fees
+   - Setting up MetaMask or using Hardhat wallets
+   - Obtaining test ETH on Goerli testnet
+   - Transferring ETH between accounts
+   - Troubleshooting wallet or funding issues
+
+### Quick Testing Steps
+
+For the impatient, here's a quick path to testing:
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Local testing
+npx hardhat test
+
+# 3. Testing on GCP cluster (using port forwarding)
+./scripts/port-forward.sh  # In one terminal
+npx hardhat run scripts/deploy.js --network gcp  # In another terminal
+```
+
+For more detailed instructions, refer to the dedicated testing guides.
+
+## Project Improvements
+
+### 1. Comprehensive Documentation
+
+We've created a detailed documentation system to make this project accessible to developers of all experience levels:
+
+- **TEST_GUIDE.md**: General testing workflow with a clear sequence of steps
+- **GCP_TESTING_GUIDE.md**: Specific GCP cluster testing procedures with troubleshooting
+- **WALLET_GUIDE.md**: Detailed wallet setup and funding instructions
+
+### 2. Enhanced Testing Scripts
+
+We've developed several scripts to simplify testing and interaction:
+
+- **port-forward.sh**: Creates a secure tunnel to your Kubernetes cluster
+- **kubectl-rpc.sh**: Direct RPC communication with nodes through kubectl
+- **check-balance.js**: Displays wallet balances
+- **fund-account.js**: Automatically transfers ETH from node accounts to your Hardhat wallet
+- **transfer-eth.js**: Easily transfers ETH between wallets
+- **print-address.js**: Displays your wallet addresses
+- **check-funded-accounts.sh**: Finds pre-funded accounts on your nodes
+
+### 3. Flexible Testing Approaches
+
+The project now supports multiple testing approaches:
+
+- **Port forwarding**: Developer-friendly local testing with Hardhat tools
+- **Direct kubectl**: CI/CD-friendly approach that doesn't require port forwarding
+- **Multiple funding options**: Various ways to obtain ETH for testing
+
+### 4. Improved Error Handling
+
+We've added comprehensive troubleshooting for common issues:
+
+- **Chain ID mismatches**: Updated configuration for Goerli testnet (Chain ID 5)
+- **Insufficient funds**: Multiple approaches to get test ETH
+- **Connection issues**: Detailed port forwarding troubleshooting
 
 ## Monitoring
 
