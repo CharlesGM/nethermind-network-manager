@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Install dependencies
 RUN apt-get update && \
@@ -6,14 +6,15 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone Nethermind repository
-RUN git clone https://github.com/NethermindEth/nethermind --recursive
+RUN git clone https://github.com/NethermindEth/nethermind.git --recursive
 WORKDIR /nethermind
 
 # Build Nethermind
-RUN dotnet publish src/Nethermind/Nethermind.Runner -c release -o /app
+RUN dotnet build src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj -c Release
+RUN dotnet publish src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj -c Release -o /app
 
 # Runtime image
-FROM mcr.microsoft.com/dotnet/runtime:9.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
 # Install runtime dependencies
 RUN apt-get update && \
