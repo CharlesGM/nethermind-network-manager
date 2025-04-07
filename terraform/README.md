@@ -1,4 +1,4 @@
-# Nethermind GCP Infrastructure
+# GCP Infrastructure
 
 This Terraform configuration provisions a complete Google Cloud Platform (GCP) infrastructure for running Nethermind services on Google Kubernetes Engine (GKE).
 
@@ -65,7 +65,7 @@ terraform apply
 
 After deployment, connect to the GKE cluster:
 ```
-gcloud container clusters get-credentials nethermind-cluster --region [REGION] --project [PROJECT_ID]
+gcloud container clusters get-credentials <your-cluster-name> --region [REGION] --project [PROJECT_ID]
 ```
 
 ## Configuration Variables
