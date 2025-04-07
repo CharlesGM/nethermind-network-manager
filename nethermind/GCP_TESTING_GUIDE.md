@@ -88,7 +88,7 @@ Since you're on Goerli testnet, you can get test ETH from a faucet:
 
 ## Choose Your Testing Approach
 
-We provide two approaches for testing smart contracts. Choose the one that works best for your scenario:
+I provide two approaches for testing smart contracts. Choose the one that works best for your scenario:
 
 | Approach | Best For | Requirements | Complexity |
 |----------|----------|--------------|------------|

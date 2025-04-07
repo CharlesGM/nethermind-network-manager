@@ -93,7 +93,7 @@ resource "null_resource" "wait_for_gke" {
   depends_on = [google_container_cluster.primary]
 
   provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials ledgerndary-cluster --region ${var.region} --project ${var.project_id}"
+    command = "gcloud container clusters get-credentials nethermind-cluster --region ${var.region} --project ${var.project_id}"
     # command = "gcloud container clusters get-credentials ${var.cluster_name} --region ${var.region} --project ${var.project_id}"
   }
 }
@@ -139,7 +139,7 @@ resource "kubernetes_service_account" "github_actions" {
       "description" = "Service account for GitHub Actions CI/CD"
     }
   }
-  depends_on = [kubernetes_namespace.ledgerndary]
+  depends_on = [kubernetes_namespace.nethermind]
 }
 
 # Create GCP Service Account with minimal privileges
@@ -224,7 +224,7 @@ resource "kubernetes_role" "github_actions" {
     resources  = ["deployments", "services", "pods", "configmaps", "secrets"]
     verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
   }
-  depends_on = [kubernetes_namespace.ledgerndary]
+  depends_on = [kubernetes_namespace.nethermind]
 }
 
 resource "kubernetes_role_binding" "github_actions" {
@@ -246,11 +246,11 @@ resource "kubernetes_role_binding" "github_actions" {
   }
   depends_on = [
     kubernetes_service_account.github_actions,
-    kubernetes_namespace.ledgerndary
+    kubernetes_namespace.nethermind
   ]
 }
-# Create ledgerndary application namespace
-resource "kubernetes_namespace" "ledgerndary" {
+# Create nethermind application namespace
+resource "kubernetes_namespace" "nethermind" {
   metadata {
     name = var.namespace
     labels = {

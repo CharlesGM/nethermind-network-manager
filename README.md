@@ -62,6 +62,7 @@ This will create:
 - Required networking components
 - IAM roles and service accounts
 - Artifact Registry for container images
+- GCP Workload Identity Federation path to be configured as secrets for GitHub actions to authenticate to GKE
 
 ### 2. Configure kubectl
 
@@ -174,7 +175,7 @@ For more detailed instructions, refer to the dedicated testing guides.
 
 ### 1. Comprehensive Documentation
 
-We've created a detailed documentation system to make this project accessible to developers of all experience levels:
+I have ve created a detailed documentation system to make this project accessible to developers of all experience levels:
 
 - **TEST_GUIDE.md**: General testing workflow with a clear sequence of steps
 - **GCP_TESTING_GUIDE.md**: Specific GCP cluster testing procedures with troubleshooting
@@ -182,7 +183,7 @@ We've created a detailed documentation system to make this project accessible to
 
 ### 2. Enhanced Testing Scripts
 
-We've developed several scripts to simplify testing and interaction:
+I have developed several scripts to simplify testing and interaction:
 
 - **port-forward.sh**: Creates a secure tunnel to your Kubernetes cluster
 - **kubectl-rpc.sh**: Direct RPC communication with nodes through kubectl
@@ -202,7 +203,7 @@ The project now supports multiple testing approaches:
 
 ### 4. Improved Error Handling
 
-We've added comprehensive troubleshooting for common issues:
+I have added comprehensive troubleshooting for common issues:
 
 - **Chain ID mismatches**: Updated configuration for Goerli testnet (Chain ID 5)
 - **Insufficient funds**: Multiple approaches to get test ETH
