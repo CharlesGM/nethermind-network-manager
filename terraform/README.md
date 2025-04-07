@@ -1,6 +1,6 @@
 # GCP Infrastructure
 
-This Terraform configuration provisions a complete Google Cloud Platform (GCP) infrastructure for running Nethermind services on Google Kubernetes Engine (GKE).
+This Terraform configuration provisions a complete Google Cloud Platform (GCP) infrastructure for running this project's Nethermind services on Google Kubernetes Engine (GKE).
 
 ## Infrastructure Components
 
