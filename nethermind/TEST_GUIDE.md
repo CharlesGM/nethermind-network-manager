@@ -11,7 +11,7 @@ This guide provides a structured approach to testing your smart contracts, from 
 ## Network Information
 
 - **Local Network**: Uses Hardhat local node with Chain ID 1337
-- **GCP Network**: Uses Nethermind with Chain ID 5 (Goerli testnet) 
+- **GCP Network**: Uses Nethermind with Chain ID 11155111 (Sepolia testnet) 
 
 ## 1. Local Development & Testing
 
@@ -87,19 +87,45 @@ For detailed instructions on testing with your GCP Kubernetes cluster, see [GCP_
 4. Monitoring contract events
 5. Troubleshooting common issues
 
+## Getting Test ETH on Sepolia
+
+Since you're using Sepolia testnet, you'll need test ETH to pay for gas fees. Here are several ways to get test ETH:
+
+1. **Official Sepolia Faucet**:
+   - Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
+   - Connect your wallet (MetaMask recommended)
+   - Request test ETH
+
+2. **Alchemy Sepolia Faucet**:
+   - Visit [Alchemy Sepolia Faucet](https://sepoliafaucet.com/)
+   - Enter your wallet address
+   - Complete the captcha
+   - Receive 0.5 ETH
+
+3. **Infura Sepolia Faucet**:
+   - Visit [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
+   - Connect your wallet
+   - Request test ETH
+
+4. **PoW Faucet**:
+   - Visit [sepolia-faucet.pk910.de](https://sepolia-faucet.pk910.de/)
+   - Solve a proof-of-work challenge
+   - Receive test ETH
+
 ## Recommended Testing Sequence
 
 1. Start with local testing (`npx hardhat test`)
 2. Deploy to a local node (`npx hardhat node` + `scripts/interact.js`)
-3. When ready for cluster testing:
+3. Get test ETH from a Sepolia faucet
+4. When ready for cluster testing:
    - Use port forwarding for a developer-friendly experience
    - Or use direct kubectl access in CI/CD environments
-4. Monitor events to verify contract behavior
-5. After successful testing, deploy to production
+5. Monitor events to verify contract behavior
+6. After successful testing, deploy to production
 
 ## Troubleshooting
 
 - If you encounter RPC connection issues, make sure your service is exposed correctly
 - For transaction failures, check that your account has sufficient ETH for gas
-- If you see chain ID mismatches, ensure your hardhat.config.js matches the network (Chain ID 1337 for local, 5 for GCP)
+- If you see chain ID mismatches, ensure your hardhat.config.js matches the network (Chain ID 1337 for local, 11155111 for Sepolia)
 - See the full troubleshooting section in [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) 

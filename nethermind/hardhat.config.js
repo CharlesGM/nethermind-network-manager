@@ -11,7 +11,7 @@ module.exports = {
     // Make sure to run the port-forward.sh script first
     gcp: {
       url: "http://localhost:8545", // Uses port-forwarding to connect to your Kubernetes service
-      chainId: 5, // Updated to match the actual chain ID (Goerli testnet)
+      chainId: 11155111, // Updated to Sepolia testnet chain ID
       
       // OPTION 1: Use a mnemonic (this will likely have 0 ETH until funded from a faucet)
       accounts: {

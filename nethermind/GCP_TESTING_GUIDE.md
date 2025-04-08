@@ -19,7 +19,7 @@ This guide provides detailed, step-by-step instructions for testing your smart c
 ## Network Information
 
 Your Nethermind network is running with the following configuration:
-- **Chain ID**: 5 (Goerli testnet)
+- **Chain ID**: 11155111 (Sepolia testnet)
 - **Network Namespace**: nethermind
 - **JSON-RPC API**: Available on port 8545
 
@@ -47,11 +47,11 @@ You should see pods like `nethermind-bootnode-0` and `nethermind-miner-0`, `neth
 
 ## Getting Funds for Transactions
 
-Since your network is using Goerli testnet (Chain ID 5), you'll need ETH to pay for gas fees. If you encounter an "InsufficientFunds" error, you have several options:
+Since your network is using Sepolia testnet (Chain ID 11155111), you'll need ETH to pay for gas fees. If you encounter an "InsufficientFunds" error, you have several options:
 
 ### Option 1: Fund Your Account from a Miner Account
 
-The easiest solution is to use our funding script, which transfers ETH from a funded node account to your Hardhat account:
+The easiest solution is to use the funding script, which transfers ETH from a funded node account to your Hardhat account:
 
 ```bash
 # Make sure port forwarding is running in another terminal
@@ -76,15 +76,35 @@ You can check if there are any pre-funded accounts on your Nethermind nodes:
 
 If found, you can update the hardhat.config.js to use these accounts directly.
 
-### Option 3: Get ETH from a Goerli Faucet
+### Option 3: Get ETH from a Sepolia Faucet
 
-Since you're on Goerli testnet, you can get test ETH from a faucet:
-1. Get your address from the Hardhat wallet:
-   ```bash
-   npx hardhat run scripts/print-address.js
-   ```
-2. Visit a Goerli faucet like [goerlifaucet.com](https://goerlifaucet.com/)
-3. Enter your address and receive test ETH
+Since you're on Sepolia testnet, you can get test ETH from one of these faucets:
+
+1. **Official Sepolia Faucet**:
+   - Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
+   - Connect your wallet (MetaMask recommended)
+   - Request test ETH
+
+2. **Alchemy Sepolia Faucet**:
+   - Visit [Alchemy Sepolia Faucet](https://sepoliafaucet.com/)
+   - Enter your wallet address
+   - Complete the captcha
+   - Receive 0.5 ETH
+
+3. **Infura Sepolia Faucet**:
+   - Visit [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
+   - Connect your wallet
+   - Request test ETH
+
+4. **PoW Faucet**:
+   - Visit [sepolia-faucet.pk910.de](https://sepolia-faucet.pk910.de/)
+   - Solve a proof-of-work challenge
+   - Receive test ETH
+
+To get your address for the faucet:
+```bash
+npx hardhat run scripts/print-address.js
+```
 
 ## Choose Your Testing Approach
 
@@ -241,7 +261,7 @@ If you see "InsufficientFunds, Balance is zero, cannot pay gas" error:
 ### Chain ID Mismatch
 
 If you see an error like `Hardhat was set to use chain id X, but connected to a chain with id Y`:
-1. Make sure your hardhat.config.js has the correct chainId (5 for Goerli) in the gcp network configuration
+1. Make sure your hardhat.config.js has the correct chainId (11155111 for Sepolia) in the gcp network configuration
 2. Verify the chain ID your Nethermind network is using:
    ```bash
    ./scripts/kubectl-rpc.sh custom eth_chainId '[]'

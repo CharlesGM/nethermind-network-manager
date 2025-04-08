@@ -69,7 +69,7 @@ This will create:
 After Terraform successfully creates the infrastructure, configure kubectl:
 
 ```bash
-gcloud container clusters get-credentials ledgerndary-cluster --region $(terraform output -raw region) --project $(terraform output -raw project_id)
+gcloud container clusters get-credentials <your-cluster-name> --region $(terraform output -raw region) --project $(terraform output -raw project_id)
 ```
 
 ### 3. CI/CD Pipeline Deployment

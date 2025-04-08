@@ -1,13 +1,13 @@
-# Getting Started with Wallets and Gas on Goerli Testnet
+# Getting Started with Wallets and Gas on Sepolia Testnet
 
-This guide provides comprehensive instructions for setting up a wallet and obtaining ETH for gas fees on the Goerli testnet. This is essential for testing your smart contracts without spending real ETH.
+This guide provides comprehensive instructions for setting up a wallet and obtaining ETH for gas fees on the Sepolia testnet. This is essential for testing your smart contracts without spending real ETH.
 
 ## Table of Contents
 
 1. [Understanding Wallets and Gas](#understanding-wallets-and-gas)
 2. [Using Your Hardhat Wallet](#using-your-hardhat-wallet)
 3. [Creating a MetaMask Wallet](#creating-a-metamask-wallet)
-4. [Obtaining Goerli ETH (Test ETH)](#obtaining-goerli-eth-test-eth)
+4. [Obtaining Sepolia ETH (Test ETH)](#obtaining-sepolia-eth-test-eth)
 5. [Transferring ETH Between Wallets](#transferring-eth-between-wallets)
 6. [Checking Balances](#checking-balances)
 7. [Troubleshooting](#troubleshooting)
@@ -33,12 +33,12 @@ Gas is the fee required to perform transactions on the Ethereum network:
 
 ### Testnet vs. Mainnet
 
-- **Goerli Testnet**: A test network where ETH has no real value, used for testing
+- **Sepolia Testnet**: A test network where ETH has no real value, used for testing
 - **Ethereum Mainnet**: The main Ethereum blockchain where ETH has real monetary value
 
 ## Using Your Hardhat Wallet
 
-Hardhat, the development environment you're using, automatically creates wallets for testing.
+Hardhat, the development environment we use in this project, automatically creates wallets for testing.
 
 ### Viewing Your Hardhat Wallet Addresses
 
@@ -85,10 +85,10 @@ While you can use the Hardhat wallet for development, it's often easier to use M
    - Anyone with this phrase can access all your ETH and tokens
 4. Verify your recovery phrase
 
-### Connecting to Goerli Testnet
+### Connecting to Sepolia Testnet
 
 1. Click the network dropdown at the top of MetaMask (it may say "Ethereum Mainnet")
-2. Select "Goerli Test Network"
+2. Select "Sepolia Test Network"
    - If not visible, go to Settings > Advanced > Show test networks (toggle on)
 
 ### Getting Your Address
@@ -97,9 +97,9 @@ Your Ethereum address is shown at the top of the MetaMask interface. You can:
 - Click on it to copy to clipboard
 - Use this address with faucets to get test ETH
 
-## Obtaining Goerli ETH (Test ETH)
+## Obtaining Sepolia ETH (Test ETH)
 
-There are several ways to get test ETH for the Goerli network:
+There are several ways to get test ETH for the Sepolia network:
 
 ### Option 1: Use the Fund-Account Script
 
@@ -113,39 +113,15 @@ If your Nethermind nodes have ETH, you can transfer it to your Hardhat wallet:
 node scripts/fund-account.js
 ```
 
-### Option 2: Goerli Faucets
+### Option 2: Sepolia Faucets
 
 Faucets are services that give away small amounts of test ETH:
 
-1. **Alchemy Goerli Faucet**:
-   - Go to [goerlifaucet.com](https://goerlifaucet.com/)
-   - Create a free Alchemy account if you don't have one
+1. **Google Cloud Web3 Faucet**:
+   - Visit [Google Cloud Web3 Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
+   - Sign in with your Google Cloud account
    - Enter your Ethereum address
-   - Click "Send Me ETH"
-   - You'll receive 0.05 Goerli ETH
-
-2. **Paradigm Faucet**:
-   - Go to [faucet.paradigm.xyz](https://faucet.paradigm.xyz/)
-   - Connect with Twitter
-   - Enter your Ethereum address
-   - Receive Goerli ETH
-
-3. **Official Goerli Faucet**:
-   - Visit [goerli-faucet.pk910.de](https://goerli-faucet.pk910.de/)
-   - This faucet requires solving captchas (mining)
-   - The longer you mine, the more ETH you receive
-
-### Option 3: Community Requests
-
-If faucets are not working, you can request Goerli ETH from:
-
-1. **Ethereum developer Discord channels**:
-   - Join [Ethereum Discord](https://discord.gg/ethereum)
-   - Look for testnet faucet channels
-
-2. **Twitter**:
-   - Tweet your Ethereum address with hashtags #Goerli #Faucet
-   - Tag Ethereum developers who might help
+   - Request test ETH
 
 ## Transferring ETH Between Wallets
 
@@ -182,9 +158,9 @@ npx hardhat run scripts/check-balance.js --network gcp
 
 ### Using Block Explorers
 
-You can also check balances and transaction history using Goerli block explorers:
+You can also check balances and transaction history using Sepolia block explorers:
 
-1. Go to [goerli.etherscan.io](https://goerli.etherscan.io/)
+1. Go to [sepolia.etherscan.io](https://sepolia.etherscan.io/)
 2. Enter your Ethereum address in the search bar
 3. View balance, transactions, and contract interactions
 
@@ -199,7 +175,7 @@ You can also check balances and transaction history using Goerli block explorers
 
 2. **Transaction Confirmation**:
    - Transactions may take time to confirm
-   - Check the transaction status on Goerli Etherscan
+   - Check the transaction status on Sepolia Etherscan
 
 ### "Insufficient Funds" Errors
 
@@ -231,4 +207,4 @@ If you see "Insufficient Funds" when trying to send transactions:
 
 ## Next Steps
 
-Once you have ETH for gas, you're ready to deploy and test your smart contracts. Follow the instructions in the [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) for deploying contracts to your Goerli testnet. 
+Once you have ETH for gas, you're ready to deploy and test your smart contracts. Follow the instructions in the [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) for deploying contracts to your Sepolia testnet. 
