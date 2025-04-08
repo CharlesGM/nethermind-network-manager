@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "ledgerndarytfstate"
+    bucket = "nevermindtfstate"
     prefix = "terraformstate"
   }
 }
