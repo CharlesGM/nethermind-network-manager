@@ -77,15 +77,135 @@ Choose one of these methods to connect to your GCP cluster:
 | Direct RPC Access | `scripts/kubectl-rpc.sh` | Direct JSON-RPC calls via kubectl |
 | Direct Deployment | `scripts/direct-deploy.js` | Deploys without port forwarding |
 
-### Step-by-Step Testing on GCP
+## Option 1: Testing Using Port Forwarding
 
-For detailed instructions on testing with your GCP Kubernetes cluster, see [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md), which covers:
+This approach creates a local tunnel to your Kubernetes services, allowing Hardhat to connect directly.
 
-1. Setting up connection to your cluster
-2. Testing with port forwarding
-3. Direct kubectl access 
-4. Monitoring contract events
-5. Troubleshooting common issues
+### Step 1: Set Up Port Forwarding to Your Nethermind Node
+
+```bash
+# Make the script executable if not already
+chmod +x scripts/port-forward.sh
+
+# Run the port forwarding script (leave this terminal window open)
+./scripts/port-forward.sh
+```
+
+This script creates a tunnel from your local port 8545 to the Nethermind service in your cluster.
+
+**Important**: Keep this terminal window open while testing. The port forwarding will stop if you close it.
+
+### Step 2: Deploy a Smart Contract to Your GCP Cluster
+
+In a new terminal window, deploy your SimpleStorage contract to the Nethermind network:
+
+```bash
+cd nethermind  # Ensure you're in the project directory
+npx hardhat run scripts/deploy.js --network gcp
+```
+
+Example output:
+```
+SimpleStorage deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+Take note of the deployed contract address, you'll need it for the next steps.
+
+### Step 3: Interact with Your Deployed Contract
+
+Use the unified interact.js script to interact with your deployed contract:
+
+```bash
+export CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+export NEW_VALUE=100  # Optional, defaults to 42
+npx hardhat run scripts/interact.js --network gcp
+```
+
+### Step 4: Monitor Contract Events
+
+To monitor events emitted by your contract:
+
+```bash
+export CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+npx hardhat run scripts/listen-events.js --network gcp
+```
+
+You can trigger a test event by running:
+
+```bash
+export CONTRACT_ADDRESS=0x5FbDB2315678afecb367f032d93F642f64180aa3
+export TRIGGER_EVENT=true
+npx hardhat run scripts/listen-events.js --network gcp
+```
+
+## Option 2: Direct Kubectl Access (No Port Forwarding Required)
+
+This approach interacts directly with the blockchain through kubectl exec commands.
+
+### Step 1: Use the Direct RPC Script to Query Blockchain State
+
+First, check if you can connect to your blockchain:
+
+```bash
+# Make the scripts executable if not already
+chmod +x scripts/kubectl-rpc.sh
+
+# Get the latest block number
+./scripts/kubectl-rpc.sh block
+
+# List available accounts
+./scripts/kubectl-rpc.sh accounts
+```
+
+Make note of the accounts returned - you'll need these to deploy contracts.
+
+### Step 2: Deploy and Interact with a Contract Directly
+
+The direct-deploy.js script handles both deployment and interaction without port forwarding:
+
+```bash
+# Compile the contracts first (if not already done)
+npx hardhat compile
+
+# Deploy and interact with the SimpleStorage contract
+node scripts/direct-deploy.js
+```
+
+This script will:
+1. Find available accounts on the blockchain
+2. Deploy the SimpleStorage contract
+3. Set a value (42)
+4. Read the value back
+5. Output the contract address for future reference
+
+For example:
+```
+Contract deployed at address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+```
+
+## Common Tasks
+
+### Check Account Balances
+
+#### With Port Forwarding:
+```bash
+npx hardhat run scripts/check-balance.js --network gcp
+```
+
+#### With Direct kubectl:
+```bash
+./scripts/kubectl-rpc.sh accounts  # List accounts
+./scripts/kubectl-rpc.sh balance 0x1234567890123456789012345678901234567890  # Check balance
+```
+
+### Verify Transaction Status
+
+When a transaction seems slow or stuck:
+
+```bash
+# Using kubectl-rpc.sh
+./scripts/kubectl-rpc.sh custom eth_getTransactionReceipt '["0x123..."]'
+```
 
 ## Getting Test ETH on Sepolia
 
@@ -113,4 +233,10 @@ Since you're using Sepolia testnet, you'll need test ETH to pay for gas fees. He
 - If you encounter RPC connection issues, make sure your service is exposed correctly
 - For transaction failures, check that your account has sufficient ETH for gas
 - If you see chain ID mismatches, ensure your hardhat.config.js matches the network (Chain ID 1337 for local, 11155111 for Sepolia)
-- See the full troubleshooting section in [GCP_TESTING_GUIDE.md](GCP_TESTING_GUIDE.md) 
+- For port forwarding issues:
+  - Make sure the port forwarding script is still running
+  - Check if the port is already in use on your machine:
+    ```bash
+    lsof -i :8545
+    ```
+  - You may need to restart the port forwarding if your connection drops 

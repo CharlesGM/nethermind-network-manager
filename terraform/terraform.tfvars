@@ -6,10 +6,8 @@ pod_cidr     = "10.16.0.0/16"
 service_cidr = "10.32.0.0/16"
 
 # GKE Configuration
-cluster_name                  = "nethermind-cluster"
-environment                   = "dev"
-workload_identity_pool_id     = "kai-gke-gh-pool"
-workload_identity_provider_id = "kai-gke-gh-provider"
+cluster_name = "nethermind-cluster"
+environment  = "dev"
 
 # Node Pool
 node_count     = 1

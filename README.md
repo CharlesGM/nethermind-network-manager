@@ -101,7 +101,7 @@ helm install nethermind ${{ env.HELM_CHART_PATH }} \
 ## Network Details
 
 - Network ID: 1337
-- Chain ID: 5 (Goerli testnet)
+- Chain ID: 11155111 (Sepolia testnet)
 - RPC Endpoint: Access via port forwarding or kubectl exec
 - Mining Nodes: 2 (configurable)
 - Bootnode: 1
@@ -126,7 +126,6 @@ This project includes comprehensive guides for testing your smart contracts on t
 | Guide | Purpose | When to Use |
 |-------|---------|-------------|
 | [TEST_GUIDE.md](nethermind/TEST_GUIDE.md) | General testing workflow from local development to production | Start here for an overview of the testing process |
-| [GCP_TESTING_GUIDE.md](nethermind/GCP_TESTING_GUIDE.md) | Detailed instructions for testing on your GCP Kubernetes cluster | Use when ready to test on your GCP-deployed network |
 | [WALLET_GUIDE.md](nethermind/WALLET_GUIDE.md) | Comprehensive wallet setup and obtaining ETH for gas | Use when you need help with wallets and getting test ETH |
 
 ### Getting Started with Testing
@@ -137,16 +136,10 @@ This project includes comprehensive guides for testing your smart contracts on t
    - Learning about the available testing tools
    - Seeing the recommended testing sequence
 
-2. **Then use [GCP_TESTING_GUIDE.md](nethermind/GCP_TESTING_GUIDE.md) when you're ready to:**
-   - Test on your GCP-deployed Nethermind network
-   - Choose between port forwarding or direct kubectl approaches
-   - Deploy contracts to your Kubernetes cluster
-   - Monitor and troubleshoot GCP-specific issues
-
-3. **Refer to [WALLET_GUIDE.md](nethermind/WALLET_GUIDE.md) if you need help with:**
+2. **Refer to [WALLET_GUIDE.md](nethermind/WALLET_GUIDE.md) if you need help with:**
    - Understanding wallets and gas fees
    - Setting up MetaMask or using Hardhat wallets
-   - Obtaining test ETH on Goerli testnet
+   - Obtaining test ETH on Sepolia testnet
    - Transferring ETH between accounts
    - Troubleshooting wallet or funding issues
 
@@ -175,10 +168,9 @@ For more detailed instructions, refer to the dedicated testing guides.
 
 ### 1. Comprehensive Documentation
 
-I have ve created a detailed documentation system to make this project accessible to developers of all experience levels:
+I have created a detailed documentation system to make this project accessible to developers of all experience levels:
 
 - **TEST_GUIDE.md**: General testing workflow with a clear sequence of steps
-- **GCP_TESTING_GUIDE.md**: Specific GCP cluster testing procedures with troubleshooting
 - **WALLET_GUIDE.md**: Detailed wallet setup and funding instructions
 
 ### 2. Enhanced Testing Scripts
@@ -205,7 +197,7 @@ The project now supports multiple testing approaches:
 
 I have added comprehensive troubleshooting for common issues:
 
-- **Chain ID mismatches**: Updated configuration for Goerli testnet (Chain ID 5)
+- **Chain ID mismatches**: Updated configuration for Sepolia testnet (Chain ID 11155111)
 - **Insufficient funds**: Multiple approaches to get test ETH
 - **Connection issues**: Detailed port forwarding troubleshooting
 

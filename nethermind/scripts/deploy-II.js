@@ -2,7 +2,7 @@ const hre = require("hardhat");
 
 async function main() {
   try {
-    console.log("Starting deployment...");
+    console.log("Starting new deployment...");
     
     // Get the signer
     const [deployer] = await hre.ethers.getSigners();
@@ -12,24 +12,20 @@ async function main() {
     const nonce = await deployer.getNonce();
     console.log("Current nonce:", nonce);
     
-    // Deploy the contract with a unique salt
-    console.log("Deploying SimpleStorage...");
-    const SimpleStorage = await hre.ethers.getContractFactory("SimpleStorage");
-    
-    // Add a unique salt to the deployment
-    const salt = Date.now().toString();
-    const simpleStorage = await SimpleStorage.deploy({
+    // Deploy a new contract with a different name
+    console.log("Deploying StorageContract...");
+    const StorageContract = await hre.ethers.getContractFactory("SimpleStorage");
+    const storageContract = await StorageContract.deploy({
       nonce: nonce,
-      gasLimit: 5000000, // Increase gas limit
-      gasPrice: await hre.ethers.provider.getGasPrice()
+      gasLimit: 5000000
     });
     
     console.log("Waiting for deployment confirmation...");
-    const deploymentReceipt = await simpleStorage.waitForDeployment();
+    const deploymentReceipt = await storageContract.waitForDeployment();
     console.log("Deployment receipt:", deploymentReceipt);
     
-    const address = await simpleStorage.getAddress();
-    console.log("SimpleStorage deployed to:", address);
+    const address = await storageContract.getAddress();
+    console.log("StorageContract deployed to:", address);
     
     // Verify the deployment
     console.log("Verifying deployment...");
