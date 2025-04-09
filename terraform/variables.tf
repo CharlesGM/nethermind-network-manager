@@ -79,13 +79,13 @@ variable "disk_size_gb" {
 variable "workload_identity_pool_id" {
   description = "Workload Identity Pool ID"
   type        = string
-  default     = "ledgerndary-github-pool"
+  default     = "nethermind-github-pool"
 }
 
 variable "workload_identity_provider_id" {
   description = "Workload Identity Provider ID"
   type        = string
-  default     = "ledgerndary-github-provider"
+  default     = "nethermind-github-provider"
 }
 
 # GitHub Configuration
@@ -139,7 +139,7 @@ variable "gke_admins" {
 variable "namespace" {
   description = "Namespace for application deployment"
   type        = string
-  default     = "ledgerndary"
+  default     = "nethermind"
 }
 
 # Artifact Registry Configuration

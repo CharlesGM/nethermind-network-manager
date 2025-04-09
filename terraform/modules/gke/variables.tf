@@ -72,13 +72,13 @@ variable "disk_size_gb" {
 variable "workload_identity_pool_id" {
   description = "Workload Identity Pool ID"
   type        = string
-  default     = "ledgerndary-github-pool"
+  default     = "nethermind-github-pool"
 }
 
 variable "workload_identity_provider_id" {
   description = "Workload Identity Provider ID"
   type        = string
-  default     = "ledgerndary-github-provider"
+  default     = "nethermind-github-provider"
 }
 
 # GitHub and Repository Configuration
@@ -90,7 +90,7 @@ variable "github_repo" {
 variable "helm_chart_path" {
   description = "Path to Helm chart in repository"
   type        = string
-  default     = "ledgerndary-helm"
+  default     = "nethermind-helm"
 }
 
 # Access Control
@@ -109,7 +109,7 @@ variable "project_owner_email" {
 variable "namespace" {
   description = "Namespace for application deployment"
   type        = string
-  default     = "ledgerndary"
+  default     = "nethermind"
 }
 
 

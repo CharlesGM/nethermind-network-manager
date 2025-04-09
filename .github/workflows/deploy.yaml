@@ -85,7 +85,7 @@ jobs:
    - name: Get GKE credentials
      uses: google-github-actions/get-gke-credentials@v1
      with:
-       cluster_name: 'ledgerndary-cluster'
+       cluster_name: 'nethermind-cluster'
        location: ${{ env.GCP_REGION }}
        project_id: ${{ env.PROJECT_ID }}
        use_auth_provider: true
@@ -154,7 +154,7 @@ jobs:
         USE_GKE_GCLOUD_AUTH_PLUGIN: True
      run: |
         # Reactivate GCP authentication
-        gcloud container clusters get-credentials ledgerndary-cluster \
+        gcloud container clusters get-credentials nethermind-cluster \
           --region ${{ env.GCP_REGION }} \
           --project ${{ env.PROJECT_ID }}
         
