@@ -80,26 +80,11 @@ If found, you can update the hardhat.config.js to use these accounts directly.
 
 Since you're on Sepolia testnet, you can get test ETH from one of these faucets:
 
-1. **Official Sepolia Faucet**:
-   - Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
-   - Connect your wallet (MetaMask recommended)
+1. **Google Cloud Web3 Faucet**:
+   - Visit [Google Cloud Web3 Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
+   - Sign in with your Google Cloud account
+   - Enter your Ethereum address
    - Request test ETH
-
-2. **Alchemy Sepolia Faucet**:
-   - Visit [Alchemy Sepolia Faucet](https://sepoliafaucet.com/)
-   - Enter your wallet address
-   - Complete the captcha
-   - Receive 0.5 ETH
-
-3. **Infura Sepolia Faucet**:
-   - Visit [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
-   - Connect your wallet
-   - Request test ETH
-
-4. **PoW Faucet**:
-   - Visit [sepolia-faucet.pk910.de](https://sepolia-faucet.pk910.de/)
-   - Solve a proof-of-work challenge
-   - Receive test ETH
 
 To get your address for the faucet:
 ```bash

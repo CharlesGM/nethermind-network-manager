@@ -89,28 +89,13 @@ For detailed instructions on testing with your GCP Kubernetes cluster, see [GCP_
 
 ## Getting Test ETH on Sepolia
 
-Since you're using Sepolia testnet, you'll need test ETH to pay for gas fees. Here are several ways to get test ETH:
+Since you're using Sepolia testnet, you'll need test ETH to pay for gas fees. Here how to get test ETH:
 
-1. **Official Sepolia Faucet**:
-   - Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
-   - Connect your wallet (MetaMask recommended)
+1. **Google Cloud Web3 Faucet**:
+   - Visit [Google Cloud Web3 Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
+   - Sign in with your Google Cloud account
+   - Enter your Ethereum address
    - Request test ETH
-
-2. **Alchemy Sepolia Faucet**:
-   - Visit [Alchemy Sepolia Faucet](https://sepoliafaucet.com/)
-   - Enter your wallet address
-   - Complete the captcha
-   - Receive 0.5 ETH
-
-3. **Infura Sepolia Faucet**:
-   - Visit [Infura Sepolia Faucet](https://www.infura.io/faucet/sepolia)
-   - Connect your wallet
-   - Request test ETH
-
-4. **PoW Faucet**:
-   - Visit [sepolia-faucet.pk910.de](https://sepolia-faucet.pk910.de/)
-   - Solve a proof-of-work challenge
-   - Receive test ETH
 
 ## Recommended Testing Sequence
 
