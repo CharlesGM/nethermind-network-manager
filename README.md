@@ -107,16 +107,6 @@ helm install nethermind ${{ env.HELM_CHART_PATH }} \
 - Bootnode: 1
 - Kubernetes Namespace: nethermind
 
-## Accessing the Network
-
-The bootnode exposes JSON-RPC API through a GCP Load Balancer. To get the endpoint:
-
-```bash
-kubectl get svc -n nethermind nethermind-bootnode -o jsonpath="{.status.loadBalancer.ingress[0].ip}"
-```
-
-Use this IP address with port 8545 to connect to the Ethereum network: `http://<EXTERNAL-IP>:8545`
-
 ## Smart Contract Testing
 
 This project includes comprehensive guides for testing your smart contracts on the Nethermind network.
