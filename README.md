@@ -181,7 +181,7 @@ The project now supports multiple testing approaches:
 
 - **Port forwarding**: Developer-friendly local testing with Hardhat tools
 - **Direct kubectl**: CI/CD-friendly approach that doesn't require port forwarding
-- **Multiple funding options**: Various ways to obtain ETH for testing
+- **Multiple funding options**: Obtaining ETH for testing from Sepolia testnet
 
 ### 4. Improved Error Handling
 
