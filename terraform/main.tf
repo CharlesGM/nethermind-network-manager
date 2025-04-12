@@ -41,3 +41,14 @@ module "artifact_registry" {
   region          = var.region
   repository_name = var.repository_name
 }
+
+module "kube_prometheus" {
+  source = "./modules/kube-prometheus"
+
+  prometheus_storage_class = var.prometheus_storage_class
+  prometheus_storage_size = var.prometheus_storage_size
+  cluster_endpoint = module.gke.cluster_endpoint
+  namespace = "monitoring"
+
+  depends_on = [module.gke]
+}

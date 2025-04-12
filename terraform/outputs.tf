@@ -56,3 +56,15 @@ output "gke_provider_id_string" {
   description = "The full provider ID string for GitHub Actions"
   value       = module.gke.provider_id_string
 }
+
+output "kube_prometheus_stack" {
+  description = "Kube-prometheus stack deployment details"
+  value = {
+    namespace = module.kube_prometheus.namespace
+    prometheus_service = module.kube_prometheus.prometheus_service_name
+    grafana_service = module.kube_prometheus.grafana_service_name
+    alertmanager_service = module.kube_prometheus.alertmanager_service_name
+    grafana_password = module.kube_prometheus.grafana_password
+  }
+  sensitive = true
+}

@@ -25,3 +25,8 @@ authorized_networks = [
     display_name = "All IPs"
   }
 ]
+
+github_repo         = "https://github.com/CharlesGM/nethermind-network-manager"
+project_id          = "play-project-325908"
+project_owner_email = "gachangocmbugua@gmail.com"
+region              = "europe-west1"
