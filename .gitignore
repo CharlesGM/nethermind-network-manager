@@ -50,6 +50,12 @@ nethermind_db/
 
 # Local .terraform directories
 **/.terraform/*
+.terraform.lock.hcl
+.terraform*
+.terraform*/*
+
+terraform/.terraform.lock.hcl
+terraform/.terraform/*
 
 # .tfstate files
 *.tfstate
