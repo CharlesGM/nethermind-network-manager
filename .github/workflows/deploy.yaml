@@ -149,6 +149,11 @@ jobs:
          echo "No changes to commit"
        fi
 
+   # Create namespace if it doesn't exist
+   - name: Create namespace
+     run: |
+       kubectl create namespace nethermind --dry-run=client -o yaml | kubectl apply -f -
+
    - name: Deploy to GKE
      env:
         USE_GKE_GCLOUD_AUTH_PLUGIN: True

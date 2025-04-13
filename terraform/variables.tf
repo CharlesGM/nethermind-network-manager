@@ -135,28 +135,8 @@ variable "gke_admins" {
   default     = []
 }
 
-# Namespace Configuration
-variable "namespace" {
-  description = "Namespace for application deployment"
-  type        = string
-  default     = "nethermind"
-}
-
 # Artifact Registry Configuration
 variable "repository_name" {
   description = "Name of the Artifact Registry repository"
   type        = string
-}
-
-# Kube-Prometheus Configuration
-variable "prometheus_storage_class" {
-  description = "Storage class for Prometheus persistent volume"
-  type        = string
-  default     = "standard"
-}
-
-variable "prometheus_storage_size" {
-  description = "Storage size for Prometheus persistent volume"
-  type        = string
-  default     = "50Gi"
 }

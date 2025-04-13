@@ -6,8 +6,10 @@ pod_cidr     = "10.16.0.0/16"
 service_cidr = "10.32.0.0/16"
 
 # GKE Configuration
-cluster_name = "nethermind-cluster"
-environment  = "dev"
+cluster_name                  = "nethermind-cluster"
+environment                   = "dev"
+workload_identity_pool_id     = "kai-gm-gh-pool"
+workload_identity_provider_id = "kai-gm-gh-provider"
 
 # Node Pool
 node_count     = 1
@@ -17,7 +19,7 @@ disk_size_gb   = 30
 
 # Artifact Registry
 repository_name = "nethermind"
-namespace       = "nethermind"
+# namespace       = "nethermind"
 
 authorized_networks = [
   {

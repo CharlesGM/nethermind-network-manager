@@ -30,7 +30,6 @@ module "gke" {
   master_ipv4_cidr_block        = var.master_ipv4_cidr_block
   authorized_networks           = var.authorized_networks
   gke_admins                    = var.gke_admins
-  namespace                     = var.namespace
 
   depends_on = [module.vpc]
 }
@@ -42,13 +41,31 @@ module "artifact_registry" {
   repository_name = var.repository_name
 }
 
-module "kube_prometheus" {
-  source = "./modules/kube-prometheus"
-
-  prometheus_storage_class = var.prometheus_storage_class
-  prometheus_storage_size = var.prometheus_storage_size
-  cluster_endpoint = module.gke.cluster_endpoint
-  namespace = "monitoring"
-
+# Add a delay to ensure GKE cluster is fully ready
+resource "time_sleep" "wait_for_gke" {
   depends_on = [module.gke]
+  create_duration = "5m"
+}
+
+# Add a provisioner to check cluster status
+resource "null_resource" "check_cluster_status" {
+  depends_on = [time_sleep.wait_for_gke]
+
+  provisioner "local-exec" {
+    command = <<EOT
+      echo "Checking cluster status..."
+      gcloud container clusters get-credentials ${var.cluster_name} \
+        --region ${var.region} \
+        --project ${var.project_id}
+      
+      echo "Cluster nodes:"
+      kubectl get nodes
+      
+      echo "Cluster components:"
+      kubectl get componentstatuses
+      
+      echo "Cluster version:"
+      kubectl version
+    EOT
+  }
 }
